@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scripted RP Whitelist Application</title>
+    <link rel="stylesheet" href="http://127.0.0.1:5000/static/pricedown.otf" as="font" type="font/ttf" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'Pricedown';
+            src: url('http://127.0.0.1:5000/static/pricedown.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            color: #fff;
+            font-family: 'Pricedown', sans-serif;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s;
+        }
+        .container { max-width: 800px; margin: 0 auto; text-align: center; }
+        .question-box { background: rgba(0,0,0,0.7); margin: 20px; padding: 20px; border-radius: 10px; overflow:auto; }
+        .answer-option { margin: 10px; padding: 10px; background: #444; cursor: pointer; border-radius: 5px; overflow:auto; }
+        .answer-option:hover { background: #222; }
+        .answer-option.selected { background: #1e90ff; color: #fff; }
+        .hidden { display: none; }
+        h1, h2 { color: #ffffff; font-size: 80px; font-weight: bolder; margin: center; }
+        .welcome-text {  }
+        button { padding: 10px 20px; background: #1e90ff; color: #fff; border: none; border-radius: 5px; cursor: pointer; pos}
+        button:hover { background: #1c7bbf; }
+        
+
+    </style>
+    <script>
+        const backgrounds = {
+            intro: ['intro-bg1.jpg', 'intro-bg2.jpg'],
+            civilian: ['civilian-bg1.jpg','intro-bg1.jpg', 'intro-bg2.jpg' ],
+            criminal: ['criminal-bg1.jpg', 'intro-bg2.jpg'],
+            environment: ['environment-bg1.jpg', 'intro-bg1.jpg'],
+            gun_user: ['gunuser-bg1.jpg', 'gunuser-bg2.jpg'],
+            archetype: ['archetype-bg.jpg'],
+            summary: ['summary-bg.jpg']
+        };
+        let currentSection = 'intro';
+        let answers = {};
+        let questionIndices = {}; // Track question index per section
+
+        function setBackground(section, qIdx = 0) {
+            const imgs = backgrounds[section] || [];
+            const img = imgs[qIdx % imgs.length] || imgs[0] || '';
+            document.body.style.backgroundImage = img ? `url("/static/${img}")` : '';
+        }
+
+        function getNextSection(current) {
+            const order = ['intro', 'civ_crim', 'civilian', 'criminal', 'environment', 'gun_user', 'archetype', 'summary'];
+            const idx = order.indexOf(current);
+            return order[idx + 1] || 'summary';
+        }
+
+        function selectAnswer(section, qIdx, answer) {
+            if (!answers[section]) answers[section] = [];
+            answers[section][qIdx] = answer;
+            // Update question index and background
+            questionIndices[section] = qIdx + 1;
+            setBackground(section, questionIndices[section]);
+            // Visually highlight selected answer
+            const questionBoxes = document.querySelectorAll('.question-box');
+            if (questionBoxes[qIdx]) {
+                const options = questionBoxes[qIdx].querySelectorAll('.answer-option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                options.forEach(opt => {
+                    if (opt.textContent === answer.replace(/\\'/g, "'")) {
+                        opt.classList.add('selected');
+                    }
+                });
+            }
+            // Enable Next button if all questions are answered
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {
+                const totalQuestions = questionBoxes.length;
+                const answered = answers[section] && answers[section].length === totalQuestions && answers[section].every(a => !!a);
+                nextBtn.disabled = !answered;
+            }
+        }
+
+        function showSection(section) {
+            currentSection = section;
+            if (section === 'intro') {
+                setBackground(section, 0);
+                document.getElementById('main').innerHTML = `
+                    <h1><span id="welcome-text">Welcome to <br> Scripted GTA RP <br> Whitelist Application</span></h1>
+                    <br><button onclick="nextSection('civ_crim')">Start Assessment</button></br>
+                `;
+            } else if (section === 'civ_crim') {
+                // Submit answers and show archetype result
+                fetch('http://127.0.0.1:5000/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(answers)
+                })
+                .then(res => res.json())
+                .then(result => {
+                    setBackground('archetype', 0);
+                    document.getElementById('main').innerHTML = `
+                        <h2>Personality Archetype Result</h2>
+                        <p>${result.archetype}</p>
+                        <button onclick="nextSection('summary')">Continue</button>
+                    `;
+                })
+                .catch(err => {
+                    document.getElementById('main').innerHTML = `
+                        <h2>Error</h2>
+                        <p>There was a problem submitting your answers. Please try again.</p>
+                        <button onclick="showSection('intro')">Restart</button>
+                    `;
+                });
+            } else if (section === 'summary') {
+                setBackground('summary', 0);
+                document.getElementById('main').innerHTML = `
+                    <h2>Final Summary</h2>
+                    <p>Application Submitted Successfully!</p>
+                    <button onclick="showSection('intro')">Restart</button>
+                `;
+            } else {
+                // For question sections
+                questionIndices[section] = 0;
+                setBackground(section, 0);
+                fetch(`http://127.0.0.1:5000/api/questions/${section}`)
+                    .then(res => res.json())
+                    .then(questions => {
+                        let html = '';
+                        questions.forEach((q, idx) => {
+                            html += `<div class="question-box"><p>${q.text}</p>`;
+                            q.options.forEach(opt => {
+                                // Escape single quotes in option text for safe HTML
+                                const safeOpt = opt.replace(/'/g, "\\'");
+                                html += `<div class="answer-option" onclick="selectAnswer('${section}', ${idx}, '${safeOpt}')">${opt}</div>`;
+                            });
+                            html += `</div>`;
+                        });
+                        html += `<button id="nextBtn" onclick="nextSection('${getNextSection(section)}')" disabled>Next</button>`;
+                        document.getElementById('main').innerHTML = html;
+
+                        // Enable Next button when all questions are answered
+                        document.querySelectorAll('.answer-option').forEach(option => {
+                            option.addEventListener('click', () => {
+                                const answered = answers[section] && answers[section].length === questions.length && answers[section].every(a => !!a);
+                                document.getElementById('nextBtn').disabled = !answered;
+                            });
+                        });
+                    });
+            }
+        }
+
+        function nextSection(section) {
+            showSection(section);
+        }
+
+        window.onload = () => showSection('intro');
+    </script>
+</head>
+<body>
+    <div id="main" class="container"></div>
+</body>
+</html>
