@@ -10,7 +10,7 @@ roles = {
         ],
         "2nd_tier": [
             "Local Politician", "Police Sarg", "Judge", "Doctor", "Property Manager", "Business Owner", "Bar tender",
-            "Car salesmen", "Lofts and decent real-estate property", "Informant", "Crooked cop", "Gang unit detective",
+            "Car salesmen", "Lofts and decent real-estate property manager", "Informant", "Crooked cop", "Gang unit detective",
             "Murder detective", "Weed farmer", "Construction", "Actor/Actress", "Military", "Corner store", "Retail shop", "Police/CO"
         ],
         "3rd_tier": [
