@@ -39,7 +39,7 @@ criminal_questions = [
             'B': {
                 "response": "Scheme and manipulate. A few calls, some lies, and I’ll make this cash real quick.",
                 "archetypes": ["Loose Screw", "Chameleon"],
-                "criminal_activity": ["organized crime", "freelancer"]
+                "criminal_activity": ["street", "freelancer"]
             },
             'C': {
                 "response": "Make a deal. I know people who can get me product. Time to hustle.",
@@ -73,7 +73,7 @@ criminal_questions = [
             },
             'D': {
                 "response": "If its not my scene, I’ll pass. I’m more down with less risk but still makes good money.",
-                "archetypes": ["Chameleon", "Mastermind"],
+                "archetypes": ["Chameleon", "Freelancer"],
                 "criminal_activity": ["freelancer", "drug dealing"]
             }
         }
