@@ -15,7 +15,7 @@ def firearm_use():
             " How comfortable are you with the idea of having a gun as part of your daily carry?",
             {
                 'A': ("It’s an essential part of my lifestyle.", ["Casual User"], ["Crashout", "Loose Screw", "Mastermind", "Chameleon"]),
-                'B': ("I carry when I have to.", ["Practical User"], ["Public Servant", "Hustler", "Chameleon"]),
+                'B': ("I carry for safety.", ["Practical User"], ["Public Servant", "Hustler", "Chameleon"]),
                 'C': ("I’d rather keep my distance from guns.", ["Peacekeeper"], ["innocent Civ", "Luxury Lifestyle",]),
                 'D': ("I don’t need a gun all the time.", ["Peacekeeper"], ["Innocent Civ", "Luxury Lifestyle", "Public Servant", "Tycoon"]),
             }
