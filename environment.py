@@ -25,13 +25,13 @@ def living_environment():
                 'A': ("Being in a place where I’m free to do what I want with minimal interference.", ["Rural"], ["Loose Screw", "Go-Getter", "Hustler", "Tycoon"]),
                 'B': ("Living in the heart of the city, where there’s always something to do and people to meet.", ["Inner City"], ["Crashout", "Luxury Lifestyle", "Go-Getter", "Chameleon", "Public Servant", "Innocent Civ"]),
                 'C': ("A clean, organized life with nice things and a peaceful home.", ["Suburb"], ["Tycoon", "Luxury Lifestyle", "Mastermind", "Innocent Civ"]),
-                'D': ("I just need four walls, a roof, and a hood store.", ["Indifferent"], ["Chameleon", "Crashout", "Innocent Civ", "Hustler", "Go-Getter"]),
+                'D': ("I just need four walls, a roof, and a hood store.", ["Indifferent"], ["Chameleon", "Crashout", "Innocent Civ", "Loose Screw", "Freelancer"]),
             }
         ),
         (
             " You hear gunshots outside your house. What’s your response?",
             {
-                'A': ("“Probably someone chasing off a wild coyote again.”", ["Rural"], ["Loose Screw", "Innocent Civ"]),
+                'A': ("“Probably someone chasing off a wild coyote again.”", ["Rural"], ["Loose Screw", "Freelancer", "Innocent Civ"]),
                 'B': ("“That better be fireworks... I'm calling the neighborhood watch.”", ["Suburb"], ["Luxury Lifestyle", "Public Servant", "Innocent Civ"]),
                 'C': ("“Ayo, was that down the street or up the block?”", ["Inner City"], ["Crashout", "Go-Getter", "Loose Screw"]),
                 'D': ("“Doesn’t matter, I sleep thru gun shots anyway.”", ["Indifferent"], ["Chameleon", "Crashout", "Innocent Civ"]),
