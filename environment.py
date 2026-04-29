@@ -25,7 +25,7 @@ def living_environment():
                 'A': ("Being in a place where I’m free to do what I want with minimal interference.", ["Rural"], ["Loose Screw", "Go-Getter", "Hustler", "Tycoon"]),
                 'B': ("Living in the heart of the city, where there’s always something to do and people to meet.", ["Inner City"], ["Crashout", "Luxury Lifestyle", "Go-Getter", "Chameleon", "Public Servant", "Innocent Civ"]),
                 'C': ("A clean, organized life with nice things and a peaceful home.", ["Suburb"], ["Tycoon", "Luxury Lifestyle", "Mastermind", "Innocent Civ"]),
-                'D': ("I just need four walls, a roof, and Postmates access.", ["Indifferent"], ["Chameleon", "Crashout", "Innocent Civ", "Hustler", "Go-Getter"]),
+                'D': ("I just need four walls, a roof, and a hood store.", ["Indifferent"], ["Chameleon", "Crashout", "Innocent Civ", "Hustler", "Go-Getter"]),
             }
         ),
         (
