@@ -17,12 +17,12 @@ civilian_questions = [
             'C': {
                 "response": "Check it out and see if you can have some fun without going too far.",
                 "type": "S",
-                "archetypes": ["Freelancer", "Public Servant"]
+                "archetypes": ["Freelancer", "Loose Screw", "Tycoon" ]
             },
             'D': {
                 "response": "Show up, take what you can, and stir things up.",
                 "type": "C",
-                "archetypes": ["Tycoon", "Hustler"]
+                "archetypes": ["Tycoon", "Hustler", "Crashout"]
             }
         }
     ),
