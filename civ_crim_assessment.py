@@ -13,9 +13,9 @@ def personality_assessment():
         (
             "You’re at a bar/party when someone insults you. What’s your first reaction?",
             {
-                'A': {"response": "Laugh it off, they’re probably just drunk.", "type": "S", "archetypes": ["Mastermind", "Tycoon"]},
-                'B': {"response": "Brush it off, but keep an eye on them.", "type": "S", "archetypes": ["Hustler", "Public Servant"]},
-                'C': {"response": "Confront them and let them know they’re out of line.", "type": "C", "archetypes": ["Loose Screw", "Crashout"]},
+                'A': {"response": "Laugh it off, they’re probably just drunk.", "type": "S", "archetypes": ["Luxury Lifestyle", "Tycoon, "Innocent Civ"]},
+                'B': {"response": "Brush it off, but keep an eye on them.", "type": "S", "archetypes": ["Hustler", "Mastermind", "Tycoon"]},
+                'C': {"response": "Confront them and let them know they’re out of line.", "type": "C", "archetypes": ["Loose Screw", "Luxury Lifestyle", "Crashout"]},
                 'D': {"response": "Knock them out and their drink.", "type": "C", "archetypes": ["Loose Screw", "Crashout"]}
             }
         ),
@@ -25,22 +25,22 @@ def personality_assessment():
                 'A': {
                 "response": "They’re more like guidelines, really.",
                 "type": "C",  # Criminal-leaning
-                "archetypes": ["Go-Getter", "Mastermind"]
+                "archetypes": ["Tycoon", "Hustler", "Luxury Lifestyle"]
             },
                 'B': {
                 "response": "Rules are meant to be broken, especially if no one’s looking.",
                 "type": "C",  # Criminal-leaning
-                "archetypes": ["Crashout", "Go-Getter"]
+                "archetypes": ["Crashout", "Go-Getter", "Loose Screw"]
             },
                 'C': {
                  "response": "I like following them… but I also like bending them for personal gain.",
                 "type": "S",  # Strategic but lawful-leaning
-                "archetypes": ["Loose Screw", "Hustler"]
+                "archetypes": ["Tycoon", "Mastermind", "Hustler"]
             },
                 'D': {
                 "response": "I’m all about following the rules… unless it’s inconvenient.",
                 "type": "S",  # Still tries to follow the law
-                "archetypes": ["Public Servant", "Freelancer", "innocent Civ"]
+                "archetypes": ["Luxury Lifestyle", "Freelancer", "innocent Civ"]
             }
             }   
         ),
